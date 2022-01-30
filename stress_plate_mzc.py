@@ -90,12 +90,12 @@ def stress_plate_mzc(coordinates,elements,D_mat,gauss_x,gauss_y,u):
             Strxy[igaus,0] = Str1[2]
 
         Str1 = mstres @ Strx
-        Strnod[lnods,0] = Strnod[lnods,0] + Str1
+        Strnod[lnods,0] = Strnod.toarray()[lnods,0] + Str1[:,0]
         Str1 = mstres @ Stry
-        Strnod[lnods,1] = Strnod[lnods,1] + Str1
+        Strnod[lnods,1] = Strnod.toarray()[lnods,1] + Str1[:,0]
         Str1 = mstres @ Strxy
-        Strnod[lnods,2] = Strnod[lnods,2] + Str1
-        Strnod[lnods,3] = Strnod[lnods,3] + np.ones((nnode,1))
+        Strnod[lnods,2] = Strnod.toarray()[lnods,2] + Str1[:,0]
+        Strnod[lnods,3] = Strnod.toarray()[lnods,3] + np.ones((nnode,1))[:,0]
 
     for i in range(npnod):
         Strnod[i,[0,1,2]] = Strnod[i,[0,1,2]]/Strnod[i,3]
